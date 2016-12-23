@@ -24,28 +24,80 @@ public class SnowflakeDrawer {
 		g2d.fillRect(0, 0, width, height);
 		
 		g2d.setColor(new Color(255, 255, 255));
-		g2d.setStroke(new BasicStroke(1));
 		
 		double pointx[] = new double[spokes];
 		double pointy[] = new double[spokes];
-		int iterations = 10;
+		int iterations = 4;
+		double angle = 2d * Math.PI - SnowflakeMain.angle;
+		System.out.println(angle);
 		
 		for(int i = 1; i <= spokes; i++) {
 			pointx[i - 1] = Math.cos(i * ((2 * Math.PI) / spokes)) * size + center.x;
 			if(i == spokes) {
 				pointy[i - 1] = Math.sin(2 * Math.PI + .001) * size + center.y;
-				SnowflakeMain.iterate(center.x, center.y, pointx[i-1], pointy[i-1], iterations, iterations, g2d);
+				if(pointx[i-1] > center.x) {
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+				}
+				if(pointx[i-1] < center.x) {
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+				}
+				
 			} else {
 				pointy[i - 1] = Math.sin(i * ((2 * Math.PI) / spokes)) * size + center.y;
-				SnowflakeMain.iterate(center.x, center.y, pointx[i-1], pointy[i-1], iterations, iterations, g2d);
+				if(pointx[i-1] >= center.x) {
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4 - 2 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) - Math.PI/4, iterations, iterations, g2d);
+				}
+				if(pointx[i-1] < center.x) {
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate((center.x + pointx[i-1]) / 2, (center.y + pointy[i-1]) / 2, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .25, center.y + (pointy[i-1]-center.y) * .25, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * .75, center.y + (pointy[i-1]-center.y) * .75, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+					
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + 3 * SnowflakeMain.angle, iterations, iterations, g2d);
+					SnowflakeMain.iterate(center.x + (pointx[i-1]-center.x) * 0, center.y + (pointy[i-1]-center.y) * 0, Math.atan((center.y - pointy[i-1]) / (center.x - pointx[i-1])) + Math.PI/4 + SnowflakeMain.angle, iterations, iterations, g2d);
+				}
 			}
 		}
 		
+		g2d.setStroke(new BasicStroke(7f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		for(int i = 0; i < pointx.length; i++) {
 			g2d.drawLine(center.x, center.y, (int)pointx[i], (int)pointy[i]);
 			
 		}
-	
 		
 		try {
 			ImageIO.write(snowflake, "png", new File("snowflake.png"));
